@@ -104,13 +104,12 @@ ion-col {
   background-color: #b36115; /* Celeste */
 }
 // Icono de "Cerrar sesión"
-.logout-icon {
-  width: 40px; // Tamaño pequeño para la imagen
-  height: 40px;
-  object-fit: contain; // Mantiene las proporciones de la imagen
-  
-}
 .logout-container {
-  margin-right: 0; /* Elimina el margen derecho */
-  padding-right: 10px; /* Opcional: Ajusta el espaciado de la derecha */
+  margin-right: 0; /* Elimina el margen derecho adicional */
+  padding-right: 10px; /* Ajusta el espaciado de la derecha */
+}
+
+.logout-icon {
+  width: 30px; /* Tamaño de la imagen */
+  height: 30px;
 }

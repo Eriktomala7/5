@@ -17,13 +17,14 @@ export type PieChartOptions = {
   chart: ApexChart;
   labels: string[];
   title: ApexTitleSubtitle;
-  colors: string[];  
+  colors: string[];  // Añadimos colores en la configuración de PieChartOptions
 };
 
 @Component({
   selector: 'app-candidato',
   templateUrl: './candidato.page.html',
   styleUrls: ['./candidato.page.scss'],
+  standalone: false,
 })
 export class CandidatoPage implements OnInit {
   dignidadesGenerales: any[] = [];
@@ -31,9 +32,8 @@ export class CandidatoPage implements OnInit {
   metodo: string = '';
   resultados: any[] = [];
   listaActas: any[] = [];
+  ganadores: any[] = [];
   ganador : any;
-  totalJuntas: number = 0;
-
 
   public barChartOptions!: BarChartOptions;
   public pieChartOptions!: PieChartOptions;
@@ -60,11 +60,31 @@ export class CandidatoPage implements OnInit {
     
     if (this.selectedDignidad) {
       this.loadResultadosGenerales(this.selectedDignidad);
-      this.loadActasProcesadas(this.selectedDignidad);  
-      this.loadResultadoGeneral(this.selectedDignidad); 
-      this.loadGanador(this.selectedDignidad); 
+      this.loadActasProcesadas(this.selectedDignidad);  // Cargar actas cuando se selecciona dignidad
+      this.loadResultadoGeneral(this.selectedDignidad); // Cargar los resultados generales con los nuevos datos
+      this.loadGanador(this.selectedDignidad); // Cargar el ganador
     }
   }
+
+  doRefresh(event: any) {
+    console.log('Comenzando refresco...');
+    
+    // Recarga los datos necesarios
+    this.loadDignidadGeneral();
+    if (this.selectedDignidad) {
+      this.loadResultadosGenerales(this.selectedDignidad);
+      this.loadActasProcesadas(this.selectedDignidad);
+      this.loadResultadoGeneral(this.selectedDignidad);
+      this.loadGanador(this.selectedDignidad);
+    }
+  
+    // Finaliza el refresco después de 1 segundo
+    setTimeout(() => {
+      console.log('Refresco completo.');
+      event.target.complete();
+    }, 1000);
+  }
+  
 
   private loadResultadosGenerales(idDignidadProceso: string) {
     if (!this.metodo) {
@@ -108,44 +128,47 @@ export class CandidatoPage implements OnInit {
     );
   }
 
+  porcentajeEscrutadas: string = '0.00';
+  porcentajePorEscrutar: string = '0.00';
+  juntasEscrutadas: number = 0;
+  juntasPorEscrutar: number = 0;
+  totalJuntas: number = 0;
+  
   loadActasProcesadas(idDignidadProceso: string) {
-    const url = `http://181.39.35.73:8080/api/listado-resultado-acta?idDignidadProceso=${idDignidadProceso}`;
+    const url = `https://api.ersatech.net/apice/api/listado-resultado-acta?idDignidadProceso=${idDignidadProceso}`;
   
     this.http.get(url).subscribe({
       next: (response: any) => {
-        console.log('Respuesta de la API:', response); 
-  
         this.listaActas = response.lista_acta;
   
-        const totalActas = response.totalActas || 0; 
-        const totalActasIngresadas = response.totalActasIngresadas || 0;
+        // Calcular las sumas
+        this.juntasEscrutadas = this.listaActas.reduce((sum: number, acta: any) => sum + acta.totalActaIngresado, 0);
+        this.juntasPorEscrutar = this.listaActas.reduce((sum: number, acta: any) => sum + acta.totalActaPorIngresar, 0);
+        this.totalJuntas = this.listaActas.reduce((sum: number, acta: any) => sum + acta.totalActa, 0);
   
-        console.log('Total de Actas:', totalActas); 
-        console.log('Total de Actas Ingresadas:', totalActasIngresadas);
+        // Calcular los porcentajes
+        this.porcentajeEscrutadas = ((this.juntasEscrutadas / this.totalJuntas) * 100).toFixed(2);
+        this.porcentajePorEscrutar = ((this.juntasPorEscrutar / this.totalJuntas) * 100).toFixed(2);
   
-        // Calcula las juntas escrutadas y por escrutar
-        this.totalJuntas = totalActas;
-     
-  
-     
-  
-        const seriesData = this.listaActas.map((acta: any) => acta.porcentaje);
-        const categories = this.listaActas.map((acta: any) => acta.parroquia);
-        const colors = this.listaActas.map((acta: any) => acta.color);
-  
-        this.initializeBarChart(seriesData, categories, colors);
+        console.log('Juntas escrutadas:', this.juntasEscrutadas);
+        console.log('Juntas por escrutar:', this.juntasPorEscrutar);
+        console.log('Total juntas:', this.totalJuntas);
       },
       error: (err) => {
-        console.error("Error al cargar las actas procesadas:", err);
-      }
+        console.error('Error al cargar las actas procesadas:', err);
+      },
     });
   }
+  
+  
+  
+
   private initializeBarChart(seriesData: number[] = [], categories: string[] = [], colors: string[] = []) {
     this.barChartOptions = {
       series: [
         {
           name: "Porcentaje",
-          data: seriesData, 
+          data: seriesData, // Asegúrate de que estos valores estén en porcentaje (ejemplo: [25, 50, 75])
         }
       ],
       chart: {
@@ -155,18 +178,18 @@ export class CandidatoPage implements OnInit {
       plotOptions: {
         bar: {
           horizontal: true,
-          barHeight: "50%", 
-          distributed: true,
+          barHeight: "50%", // Ajusta la altura de las barras
+          distributed: true, // Colores diferentes por barra (si se necesitan)
         },
       },
       xaxis: {
-        categories: categories,
+        categories: categories, // Nombres de las categorías
         title: {
           text: "Parroquias",
         },
         labels: {
           formatter: function (val: any) {
-            return `${val}%`; 
+            return `${val}%`;
           },
         },
       },
@@ -186,9 +209,9 @@ export class CandidatoPage implements OnInit {
     this.pieChartOptions = {
       series: seriesData,
       chart: {
-        type: "pie",
+        type: "pie",        
         height: 400,
-        width: 950,
+        width: 1050,
         toolbar: {
           show: true,
           tools: {
@@ -208,17 +231,17 @@ export class CandidatoPage implements OnInit {
 
   onTabChange(event: any) {
     if (event.detail.value === 'actasProcesadas') {
-      this.loadActasProcesadas(this.selectedDignidad);
+      this.loadActasProcesadas(this.selectedDignidad);  // Actualizar las actas cuando se selecciona la pestaña
     }
   }
 
 
   private loadResultadoGeneral(idDignidadProceso: string) {
-    const url = `http://181.39.35.73:8080/api/listado-resultado-general?idDignidadProceso=${idDignidadProceso}`;
+    const url = `https://api.ersatech.net/apice/api/listado-resultado-general?idDignidadProceso=${idDignidadProceso}`;
   
     this.http.get(url).subscribe({
       next: (response: any) => {
-        const resultadosGenerales = response.lista_general; 
+        const resultadosGenerales = response.lista_general; // Lista de resultados generales
         const votosBlancos = response.votos_blancos;
         const votosNulos = response.votos_nulos;
   
@@ -255,33 +278,16 @@ export class CandidatoPage implements OnInit {
   
     this.generalService.getGanador(idDignidadProceso, this.metodo).subscribe({
       next: (response) => {
-        this.ganador = response.lista_ganador; 
-        console.log('Ganadores:', this.ganador); 
+        this.ganador = response.lista_ganador; // Almacena toda la lista de ganadores
+        console.log('Ganadores:', this.ganador); // Verifica todos los datos en consola
       },
       error: (err) => {
         console.error('Error al obtener los ganadores:', err);
       },
     });
-  
   }
-  doRefresh(event: any) {
-    console.log('Comenzando refresco...');
-    
-    // Recarga los datos necesarios
-    this.loadDignidadGeneral();
-    if (this.selectedDignidad) {
-      this.loadResultadosGenerales(this.selectedDignidad);
-      this.loadActasProcesadas(this.selectedDignidad);
-      this.loadResultadoGeneral(this.selectedDignidad);
-      this.loadGanador(this.selectedDignidad);
-    }
   
 
-    setTimeout(() => {
-      console.log('Refresco completo.');
-      event.target.complete();
-    }, 1000);
-  }
   async confirmLogout() {
     const alert = await this.alertController.create({
       header: 'Cerrar Sesión',
@@ -302,4 +308,5 @@ export class CandidatoPage implements OnInit {
 
     await alert.present();
   }
+
 }

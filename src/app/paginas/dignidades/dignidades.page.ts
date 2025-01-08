@@ -4,9 +4,10 @@ import { Dignidad } from 'src/app/interface/interface';
 import { GeneralService } from 'src/app/services/general.service';
 
 @Component({
-  selector: 'app-dignidades',
-  templateUrl: './dignidades.page.html',
-  styleUrls: ['./dignidades.page.scss'],
+    selector: 'app-dignidades',
+    templateUrl: './dignidades.page.html',
+    styleUrls: ['./dignidades.page.scss'],
+    standalone: false
 })
 export class DignidadesPage implements OnInit {
   loggedUserId: string = ''; 

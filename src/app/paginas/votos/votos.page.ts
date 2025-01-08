@@ -12,9 +12,10 @@ interface Candidato {
 }
 
 @Component({
-  selector: 'app-votos',
-  templateUrl: './votos.page.html',
-  styleUrls: ['./votos.page.scss'],
+    selector: 'app-votos',
+    templateUrl: './votos.page.html',
+    styleUrls: ['./votos.page.scss'],
+    standalone: false
 })
 export class VotosPage implements OnInit {
   loggedUserName: string = '';

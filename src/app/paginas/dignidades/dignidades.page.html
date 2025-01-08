@@ -2,12 +2,13 @@
   <ion-toolbar color="primary">
     <ion-title class="ion-text-center borde">Dignidades</ion-title>
     <ion-buttons slot="end" class="logout-container">
-      <ion-button (click)="confirmLogout()" class="logout-button">
-        <ion-icon slot="icon-only" name="power"></ion-icon>
+      <ion-button (click)="confirmLogout()">
+        <img class="logout-icon" src="assets/img/cerrar1.png" alt="Cerrar sesión">
       </ion-button>
-    </ion-buttons>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
+
 
 <ion-content class="ion-padding sencillo">
   <ion-card>
@@ -15,7 +16,6 @@
       <ion-card-title>Información del usuario</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <p><strong>ID:</strong> {{ loggedUserId }}</p>
       <p><strong>Nombre:</strong> {{ loggedUserName }}</p>
       <p><strong>Recinto:</strong> {{ recinto }}</p> 
     </ion-card-content>

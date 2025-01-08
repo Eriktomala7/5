@@ -3,9 +3,10 @@ import { AlertController, NavController } from '@ionic/angular';
 import { GeneralService } from 'src/app/services/general.service';
 
 @Component({
-  selector: 'app-juntas',
-  templateUrl: './juntas.page.html',
-  styleUrls: ['./juntas.page.scss'],
+    selector: 'app-juntas',
+    templateUrl: './juntas.page.html',
+    styleUrls: ['./juntas.page.scss'],
+    standalone: false
 })
 export class JuntasPage implements OnInit {
 
