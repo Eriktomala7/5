@@ -9,8 +9,8 @@ import { VotoData, ActaVoto } from 'src/app/interface/interface';
   providedIn: 'root',
 })
 export class GeneralService {
-  private apiUrl = 'http://181.39.35.73:8080/api/'; // URL de la API
-  private apilogin = 'http://181.39.35.73:8080/api/login'; // URL de login
+  private apiUrl = 'https://api.ersatech.net/apice/api/'; // URL de la API
+  private apilogin = 'https://api.ersatech.net/apice/api/login'; // URL de login
 
   constructor(private http: HttpClient) {}
 
