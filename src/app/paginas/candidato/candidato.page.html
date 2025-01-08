@@ -1,0 +1,191 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Resultados Elecciones</ion-title>
+    <ion-buttons slot="end">
+    
+        <ion-button (click)="confirmLogout()">
+          <ion-icon slot="icon-only" name="power"></ion-icon>
+        </ion-button>
+     
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Refresher -->
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingText="Desliza hacia abajo para refrescar" refreshingSpinner="circles">
+    </ion-refresher-content>
+  </ion-refresher>
+<!-- Card de selección de proceso y dignidad -->
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Elige una Dignidad</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <!-- Agregar un margen inferior al item para mayor separación -->
+    <ion-item lines="none" class="ion-margin-bottom">
+      <ion-label position="floating">Dignidad</ion-label>
+      <ion-select
+        placeholder="Seleccione: "
+        (ionChange)="onDignidadChange($event)"
+        class="custom-select"
+      >
+        <ion-select-option
+          *ngFor="let dignidad of dignidadesGenerales"
+          [value]="dignidad.idDignidadProceso"
+        >
+          {{ dignidad.dignidadElegir }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- Mostrar el contenido solo cuando se haya seleccionado una dignidad -->
+    <div *ngIf="selectedDignidad" class="ion-margin-top">
+      <!-- Aquí puedes agregar más detalles si lo deseas -->
+    </div>
+  </ion-card-content>
+</ion-card>
+
+
+  <div style="margin-top: 10px;">
+    <ion-segment [(ngModel)]="selectedSegment">
+      <ion-segment-button value="resumen">
+        <ion-label>Resumen</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="escanios">
+        <ion-label>Escaños Asignados</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="actas">
+        <ion-label>Actas Procesadas</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <div *ngIf="selectedSegment == 'resumen'">
+    <!-- Gráfico de torta -->
+    <div id="pie-chart" style="margin-top: 20px; overflow-x: auto; padding: 10px 0; " [align]="'center'">
+      <div style="min-width: 600px;"> 
+        <apx-chart
+          [series]="pieChartOptions.series"
+          [chart]="pieChartOptions.chart"
+          [labels]="pieChartOptions.labels"
+          [plotOptions]="barChartOptions.plotOptions"
+          [colors]="pieChartOptions.colors">
+          
+        </apx-chart>
+      </div>
+    </div>
+  
+
+    <!-- Tabla de resultados -->
+    <ion-card *ngIf="resultados.length > 0" style="margin-top: 20px;">
+      <ion-card-header>
+        <ion-card-title>Tabla de Resultados</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <table style="width: 100%; border-collapse: collapse;">
+          <thead>
+            <tr>
+              <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Partido</th>
+              <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Votos</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let resultado of resultados">
+              <td style="border: 1px solid #ddd; padding: 8px;">{{ resultado.partido }}</td>
+              <td style="border: 1px solid #ddd; padding: 8px;">{{ resultado.votos }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Resumen de Votaciones</ion-card-title>
+      </ion-card-header>
+    
+      <ion-card-content>
+        <div>
+          <p><strong>Votos Aprobados:</strong> {{ totalVotosAprobados }}</p>
+          <p><strong>Votos Blancos:</strong> {{ totalVotosBlancos }}</p>
+          <p><strong>Votos Nulos:</strong> {{ totalVotosNulos }}</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+
+
+  <div *ngIf="selectedSegment == 'escanios'"> 
+    <ion-card style="margin-top: 20px;">
+      <ion-card-header>
+        <ion-card-title>Escaños Asignados</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <table style="width: 100%; border-collapse: collapse;">
+          <thead style="border: 1px solid #cc1c1c; padding: 8px; text-align: left;">
+            <tr style="border: 1px solid #cc1c1c; padding: 8px; text-align: left;">
+              <th style="border: 1px solid #1d1b1b; padding: 8px; text-align: left;">Escaño</th>
+              <th style="border: 1px solid #000000; padding: 8px; text-align: left;">Candidato</th>
+              <th style="border: 1px solid #000000; padding: 8px; text-align: left;">Partido</th>
+              <th style="border: 1px solid #000000; padding: 8px; text-align: left;">Votos</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Aquí se muestran los datos del ganador -->
+            <tr *ngFor="let item of ganador" class="ganador-item">
+              <td style="border: 1px solid #000000; padding: 8px;">{{ item.detalle }}</td>
+              <td style="border: 1px solid #000000; padding: 8px;">{{ item.candidato }}</td>
+              <td style="border: 1px solid #000000; padding: 8px;">{{ item.partido }} ({{ item.listaPartido }})</td>
+              <td style="border: 1px solid #000000; padding: 8px;">{{ item.votos }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  
+  <div *ngIf="selectedSegment == 'actas'">
+    <ion-card style="margin-top: 20px;">
+      <ion-card-header>
+        <ion-card-title style="text-align: center;">Actas Procesadas</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <!-- Tabla de datos -->
+        <ion-grid>
+          <!-- Cabecera de la tabla -->
+          <ion-row>
+            <ion-col style="text-align: center;"><strong>Parroquia</strong></ion-col>
+            <ion-col style="text-align: center;"><strong>Avance</strong></ion-col>
+            <ion-col style="text-align: center;"><strong>Por Escrutar</strong></ion-col>
+          </ion-row>
+  
+          <!-- Filas de la tabla -->
+          <ion-row *ngFor="let acta of listaActas">
+            <ion-col style="text-align: center;">{{ acta.parroquia }}</ion-col>
+            <ion-col style="text-align: center;">
+              <!-- Contenedor de barra de progreso -->
+              <div style="position: relative; background: #f2f2f2; height: 20px; border-radius: 5px; overflow: hidden; width: 80%; margin: 0 auto;">
+                <div
+                  style="background: #4caf50; height: 100%; border-radius: 5px;"
+                  [style.width.%]="acta.porcentaje">
+                </div>
+                <span style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); font-size: 12px; line-height: 20px; color: #000;">
+                  {{ acta.totalActaIngresado }}/{{ acta.totalActa }}
+                </span>
+              </div>
+              <!-- Mostrar el porcentaje debajo de la barra -->
+              <div style="text-align: center; margin-top: 5px; font-size: 12px; color: #555;">
+                {{ acta.porcentaje }}%
+              </div>
+            </ion-col>
+            <ion-col style="text-align: center;">{{ acta.totalActaPorIngresar }}</ion-col>
+          </ion-row>
+        </ion-grid>
+  
+      </ion-card-content>
+  
+  
+  

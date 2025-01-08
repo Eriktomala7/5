@@ -1,0 +1,99 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Votos</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirmLogout()">
+        <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Información</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Usuario:</strong> {{ loggedUserName }}</p>
+      <p><strong>Recinto:</strong> {{ recinto }}</p>
+      <p><strong>Dignidad elegida:</strong> {{ dignidadElegida }}</p>
+      <p><strong>Junta Elegida:</strong> {{ juntaElegida }}</p>
+      <p><strong>Votantes:</strong> {{ votantes }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Otros Votos -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Otros Votos</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-row>
+        <ion-col size="8" class="votos-label">
+          <ion-label>Votos Nulos</ion-label>
+        </ion-col>
+        <ion-col size="4" class="votos-input">
+          <ion-input
+            [(ngModel)]="votosnulos"
+            type="number"
+            placeholder="0"
+            min="0"
+            step="1"
+            class="input-votos"
+          ></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="8" class="votos-label">
+          <ion-label>Votos Blancos</ion-label>
+        </ion-col>
+        <ion-col size="4" class="votos-input">
+          <ion-input
+            [(ngModel)]="votosblancos"
+            type="number"
+            placeholder="0"
+            min="0"
+            step="1"
+            class="input-votos"
+          ></ion-input>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Candidatos y Votación -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Candidatos</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-row class="header-row">
+        <ion-col size="2"><strong>#</strong></ion-col>
+        <ion-col><strong>Nombre</strong></ion-col>
+        <ion-col size="3"><strong>Votos</strong></ion-col>
+      </ion-row>
+
+      <ion-row *ngFor="let candidato of candidatos; let i = index">
+        <ion-col size="2">{{ candidato.lista }}</ion-col>
+        <ion-col>{{ candidato.nombreCandidato }}</ion-col>
+        <ion-col size="3">
+          <ion-input
+            [(ngModel)]="candidato.votos"
+            type="number"
+            placeholder="0"
+            min="0"
+            step="1"
+            class="input-votos"
+          ></ion-input>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button expand="block" (click)="enviarVotos()">
+    Guardar Votos
+  </ion-button>
+</ion-content>
+
+<ion-footer></ion-footer>

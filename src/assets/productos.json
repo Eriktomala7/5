@@ -1,0 +1,13 @@
+[
+    {
+      "codigo": "123456",
+      "nombre": "Producto Ejemplo 1",
+      "descripcion": "Este es el primer producto."
+    },
+    {
+      "codigo": "789012",
+      "nombre": "Producto Ejemplo 2",
+      "descripcion": "Este es el segundo producto."
+    }
+  ]
+  

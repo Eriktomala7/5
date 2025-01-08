@@ -1,0 +1,113 @@
+// Define los colores
+$primary-color: #6495ED; // Azul del logo
+$secondary-color: #e71d36; // Rojo del logo
+$text-color: #000; // Color para el texto
+$background-color: #83d4ec; // Color de fondo
+
+.page-login {
+  display: flex; /* Habilita Flexbox */
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  height: 100vh; /* Altura completa de la ventana */
+  background-color: #0078d7; /* Color de fondo de la página */
+}
+
+// Estilos generales
+ion-content {
+  --background: none; // Elimina cualquier fondo predeterminado
+  background-image: url('/assets/img/back.png'); // Imagen de fondo
+  background-size: cover; // La imagen cubre todo el área
+  background-position: center; // Centrar la imagen
+  background-repeat: no-repeat; // No repetir la imagen
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+// Tarjeta de inicio de sesión
+ion-card {
+  margin: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #ffffffcc; // Fondo blanco semitransparente
+}
+
+ion-card-header {
+  background-color: $primary-color;
+  color: #fff;
+  text-align: center;
+  border-radius: 10px 10px 0 0;
+  padding: 15px 0;
+  display: flex; /* Flexbox para alinear el contenido */
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+  height: 80px; /* Define una altura específica para el encabezado */
+}
+
+ion-card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0; /* Elimina márgenes que puedan desalinear */
+  text-transform: uppercase; /* Opcional: Mayúsculas para más énfasis */
+}
+
+// Elementos del formulario
+ion-item {
+  --border-radius: 5px;
+  margin: 10px 0;
+}
+
+ion-label {
+  color: $text-color;
+}
+
+ion-input {
+  color: $text-color;
+}
+
+ion-button {
+  --background: #e71d36 !important; /* Rojo del logo */
+  --background-hover: #c91b30 !important; /* Rojo oscuro para hover */
+  --background-activated: #a51627 !important; /* Rojo oscuro al presionar */
+  --color: #fff !important; /* Texto en blanco */
+  --border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Sombra para el botón */
+}
+
+ion-button:hover {
+  background-color: #c91b30 !important; // Rojo un poco más oscuro al pasar el mouse
+}
+
+ion-button:active {
+  background-color: #a51627 !important; // Rojo aún más oscuro al presionar
+}
+
+// Mensaje de error
+ion-text[color="danger"] {
+  text-align: center;
+  font-size: 0.9rem;
+  color: $secondary-color;
+}
+
+// Contenedor del logo
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px; /* Ajusta la altura según tus necesidades */
+  margin-bottom: 20px; /* Espacio inferior */
+}
+
+.logo-container img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+// Validación de campos
+ion-item .invalid {
+  border: 2px solid red;
+}

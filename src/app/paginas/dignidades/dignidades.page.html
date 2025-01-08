@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title class="ion-text-center borde">Dignidades</ion-title>
+    <ion-buttons slot="end" class="logout-container">
+      <ion-button (click)="confirmLogout()" class="logout-button">
+        <ion-icon slot="icon-only" name="power"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding sencillo">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Información del usuario</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>ID:</strong> {{ loggedUserId }}</p>
+      <p><strong>Nombre:</strong> {{ loggedUserName }}</p>
+      <p><strong>Recinto:</strong> {{ recinto }}</p> 
+    </ion-card-content>
+  </ion-card>
+
+  <div>
+    <p><strong>Dignidad a elegir:</strong></p>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Selecciona una Dignidad</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12" *ngFor="let dignidad of dignidadesDisponibles">
+              <ion-button expand="block" (click)="confirmSelection(dignidad)">
+                {{ dignidad.nombreDignidad }}
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
+

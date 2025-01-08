@@ -1,0 +1,116 @@
+ion-content {
+  --background: #87dcf8; /* Fondo más claro para el contenido */
+}
+
+ion-header {
+  background-color: #4f83cc; /* Azul celeste */
+}
+
+
+ion-toolbar {
+  ion-title {
+    color: rgb(255, 255, 255); /* Texto blanco */
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+  }
+    
+  }
+  ion-buttons {
+    ion-button {
+      color: white; /* Botones blancos */
+    }
+  }
+
+ion-card {
+  background-color: #e0f7fa; /* Celeste */
+  margin-bottom: 20px; /* Espaciado entre tarjetas */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+}
+
+ion-card-header {
+  background-color: #3880ff; /* Verde oscuro */
+  color: white; /* Texto blanco */
+  border-radius: 10px 10px 0 0; /* Bordes redondeados en la parte superior */
+}
+
+ion-card-title {
+  color: white; /* Título blanco */
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+ion-card-content {
+  padding: 15px;
+  color: #060808; /* Verde oscuro para el contenido */
+  font-size: 1.1rem;
+}
+
+ion-label {
+  font-size: 1rem;
+  color: #555; /* Texto gris */
+}
+
+.user-info p {
+  font-size: 1.1rem;
+  margin: 10px 0; /* Margen entre párrafos */
+}
+
+ion-button {
+  color: white; /* Texto blanco */
+  border-radius: 8px; /* Bordes redondeados */
+  padding: 10px 20px; /* Espaciado interno */
+}
+
+ion-button[color="primary"] {
+  background-color: #1e88e5; /* Azul para botones primarios */
+  font-weight: bold;
+}
+
+ion-button[color="primary"]:hover {
+  background-color: #3880ff;/* Azul más oscuro al pasar el mouse */
+}
+
+ion-button.expand-block {
+  width: 100%; /* Botones ocupan todo el ancho */
+}
+
+ion-item {
+  margin-bottom: 15px; /* Espaciado entre ítems de lista */
+}
+
+ion-icon {
+  font-size: 5rem; /* Tamaño de icono */
+}
+
+ion-grid {
+  margin-top: 20px;
+}
+
+ion-row {
+  display: flex;
+  justify-content: center;
+}
+
+ion-col {
+  margin-bottom: 10px;
+  width: 100%; /* Botones en columnas completas */
+} 
+
+
+
+.sencillo {
+  background-color: #b36115; /* Celeste */
+}
+// Icono de "Cerrar sesión"
+.logout-icon {
+  width: 40px; // Tamaño pequeño para la imagen
+  height: 40px;
+  object-fit: contain; // Mantiene las proporciones de la imagen
+  
+}
+.logout-container {
+  margin-right: 0; /* Elimina el margen derecho */
+  padding-right: 10px; /* Opcional: Ajusta el espaciado de la derecha */
+}

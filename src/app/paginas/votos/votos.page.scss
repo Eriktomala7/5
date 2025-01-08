@@ -1,0 +1,102 @@
+ion-content {
+  --background: #87dcf8; /* Fondo más claro para todo el contenido */
+}
+
+ion-card {
+  margin-bottom: 20px; /* Espacio entre tarjetas */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+ion-card-header {
+  background-color: #3880ff; /* Color de fondo azul para la cabecera */
+  color: white; /* Texto blanco */
+  border-radius: 10px 10px 0 0; /* Bordes redondeados en la parte superior */
+}
+
+ion-card-title {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+ion-card-content {
+  padding: 15px;
+  font-size: 1.1rem;
+  color: #333; /* Color de texto gris */
+}
+
+ion-grid {
+  margin-top: 10px;
+}
+
+ion-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.header-row {
+  background-color: #f0f0f0;
+  font-weight: bold;
+  color: #333;
+}
+
+ion-col {
+  padding: 5px;
+  font-size: 1.1rem;
+}
+
+ion-col strong {
+  color: #3880ff; /* Color azul para los títulos de las columnas */
+}
+
+.input-votos {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fafafa;
+  font-size: 1rem;
+}
+
+.input-votos:focus {
+  outline: none;
+  border-color: #3880ff;
+}
+
+ion-button {
+  margin-top: 20px;
+  --border-radius: 20px; /* Bordes redondeados en el botón */
+  padding: 10px 20px; /* Espaciado dentro del botón */
+}
+
+ion-button[expand='block'] {
+  background-color: #3880ff;
+  color: white;
+  font-weight: bold;
+}
+
+ion-button[expand='block']:hover {
+  background-color: #0056b3; /* Color de fondo más oscuro al pasar el mouse */
+}
+
+ion-icon {
+  font-size: 1.4rem; /* Tamaño de icono ajustado */
+}
+
+//en toolbar haz un poco mas grande el texto y que quede centrado
+
+ion-toolbar {
+  ion-title {
+    color: rgb(255, 255, 255); /* Texto blanco */
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+  }
+    
+  }
+  ion-buttons {
+    ion-button {
+      color: white; /* Botones blancos */
+    }
+  }

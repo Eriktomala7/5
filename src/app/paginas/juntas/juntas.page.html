@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Juntas</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirmLogout()">
+        <ion-icon slot="icon-only" name="power"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Información</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="user-info">
+        <p><strong>Nombre:</strong> {{ loggedUserName }}</p>
+        <p><strong>Recinto:</strong> {{ recinto }}</p>
+        <p><strong>Dignidad elegida:</strong> {{ dignidadElegida }}</p>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Juntas / Mesas</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let junta of juntas">
+          <ion-label>{{ junta.nombreJunta }} - {{ junta.sexo }}</ion-label>
+          <ion-button color="primary" slot="end" (click)="confirmSelection(junta)">Elegir</ion-button>
+        </ion-item>
+      </ion-list>
+
+      
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
