@@ -31,12 +31,12 @@ ion-card {
 
 ion-card-header {
   background-color: #3880ff; /* Verde oscuro */
-  color: white; /* Texto blanco */
+  color: rgb(0, 0, 0); /* Texto blanco */
   border-radius: 10px 10px 0 0; /* Bordes redondeados en la parte superior */
 }
 
 ion-card-title {
-  color: white; /* Título blanco */
+  color: rgb(0, 0, 0); /* Título blanco */
   font-size: 1.4rem;
   font-weight: bold;
 }
@@ -44,7 +44,7 @@ ion-card-title {
 ion-card-content {
   padding: 15px;
   color: #060808; /* Verde oscuro para el contenido */
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 ion-label {
@@ -58,7 +58,7 @@ ion-label {
 }
 
 ion-button {
-  color: white; /* Texto blanco */
+  color: rgb(0, 0, 0); /* Texto blanco */
   border-radius: 8px; /* Bordes redondeados */
   padding: 10px 20px; /* Espaciado interno */
 }

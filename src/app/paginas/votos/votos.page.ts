@@ -76,6 +76,26 @@ export class VotosPage implements OnInit {
       }
     );
   }
+  validarCampos(): boolean {
+    // Validar si los votos nulos y blancos son números válidos y no negativos
+    if (this.votosnulos < 0 || this.votosblancos < 0) {
+      this.mostrarAlertaError("Los votos nulos y blancos no pueden ser negativos.");
+      return false;
+    }
+  
+    // Validar si todos los candidatos tienen votos
+    for (const lista in this.candidatosAgrupados) {
+      for (const candidato of this.candidatosAgrupados[lista]) {
+        if (candidato.votos === undefined || candidato.votos < 0) {
+          this.mostrarAlertaError(`El candidato ${candidato.nombreCandidato} no tiene votos válidos.`);
+          return false;
+        }
+      }
+    }
+  
+    // Si todas las validaciones pasan
+    return true;
+  }
 
   agruparCandidatosPorLista() {
     this.candidatosAgrupados = {};
@@ -134,7 +154,7 @@ export class VotosPage implements OnInit {
   
     try {
       // Llamada a la API para enviar los votos y el idPartido
-       //const response = await this.generalService.postVoto(votosData).toPromise();
+       const response = await this.generalService.postVoto(votosData).toPromise();
        console.log("Datos que se enviarán al backend:", votosData);
   
       this.mostrarAlertaExito('Votos guardados exitosamente');
@@ -150,6 +170,11 @@ export class VotosPage implements OnInit {
   }
   // Confirmación antes de grabar los votos
   async confirmarGrabarVotos() {
+    // Verificar si los campos están válidos
+    if (!this.validarCampos()) {
+      return; // Si la validación falla, no continuar con el proceso
+    }
+  
     const alert = await this.alertController.create({
       header: 'Confirmar',
       message: '¿Está seguro de que desea grabar los votos?',
@@ -166,7 +191,7 @@ export class VotosPage implements OnInit {
         },
       ],
     });
-
+  
     await alert.present();
   }
 

@@ -1,19 +1,41 @@
 ion-content {
-    --background: #87dcf8; /* Color de fondo más claro para todo el contenido */
-  }
-  
-  ion-card {
-    margin-bottom: 20px; /* Espacio entre tarjetas */
-    border-radius: 10px; /* Bordes redondeados en las tarjetas */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra ligera */
-  }
-  
-  ion-card-header {
-    background-color: #3880ff; /* Color de fondo azul para la cabecera de la tarjeta */
-    color: white; /* Texto blanco */
-    border-radius: 10px 10px 0 0; /* Bordes redondeados solo en la parte superior */
-  }
- 
+  --background: #87dcf8; /* Fondo más claro para el contenido */
+}
+
+ion-card {
+  background-color: #e0f7fa; /* Celeste */
+  margin-bottom: 20px; /* Espaciado entre tarjetas */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+}
+
+ion-card-header {
+  background-color: #3880ff; /* Azul oscuro */
+  color: rgb(255, 255, 255); /* Texto blanco */
+  border-radius: 10px 10px 0 0; /* Bordes redondeados en la parte superior */
+}
+
+ion-card-title {
+  color: rgb(0, 0, 0); /* Título negro */
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+ion-card-content {
+  padding: 15px;
+  color: #060808; /* Verde oscuro para el contenido */
+  font-size: 1.1rem;
+}
+
+.logout-container {
+  margin-right: 0; /* Elimina el margen derecho adicional */
+  padding-right: 10px; /* Ajusta el espaciado de la derecha */
+}
+
+.logout-icon {
+  width: 30px; /* Tamaño de la imagen */
+  height: 30px;
+}
 ion-toolbar {
   ion-title {
     color: rgb(255, 255, 255); /* Texto blanco */
@@ -27,60 +49,4 @@ ion-toolbar {
     ion-button {
       color: white; /* Botones blancos */
     }
-  }
-
-  
-  
-  ion-card-title {
-    font-size: 1.4rem;
-    font-weight: bold;
-  }
-  
-  ion-card-content {
-    padding: 15px;
-    font-size: 1.1rem;
-    color: #333; /* Color de texto para el contenido */
-  }
-  
-  ion-label {
-    font-size: 1rem;
-    color: #555; /* Color de texto gris para las juntas */
-  }
-  
-  .user-info p {
-    font-size: 1.1rem;
-    margin: 10px 0; /* Margen entre los párrafos */
-  }
-  
-  ion-button {
-    --border-radius: 20px; /* Bordes redondeados en el botón */
-    padding: 10px 20px; /* Espaciado dentro del botón */
-  }
-  
-  ion-button[color='primary'] {
-    background-color: #3880ff; /* Color de fondo para los botones "Elegir" */
-    color: white;
-    font-weight: bold;
-  }
-  
-  ion-button[color='primary']:hover {
-    background-color: #0056b3; /* Color de fondo más oscuro al pasar el mouse */
-  }
-  
-  ion-item {
-    margin-bottom: 15px; /* Espaciado entre los ítems de la lista */
-  }
-  
-  ion-icon {
-    font-size: 1.4rem; /* Tamaño de icono ajustado */
-  }
-  
-  .logout-container {
-    margin-right: 0; /* Elimina el margen derecho adicional */
-    padding-right: 10px; /* Ajusta el espaciado de la derecha */
-  }
-  
-  .logout-icon {
-    width: 30px; /* Tamaño de la imagen */
-    height: 30px;
   }
